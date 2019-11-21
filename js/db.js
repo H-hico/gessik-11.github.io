@@ -16,3 +16,28 @@ db.collection('doces').onSnapshot(snapshot => {
         }
     });
 });
+
+
+
+// adicionar nova sobremesa
+const form = document.querySelector('form');
+form.addEventListener('submit', evt => {
+    evt.preventDefault();
+
+    const sobremesa = {
+        nome: form.sobremesaTitulo.value,
+        descricao: form.sobremesaDescricao.value,
+        link: form.sobremesaLink.value,
+        endereco_imagem: form.sobremesaArquivo.value
+    };
+
+    db.collection('sobremesas').add(sobremesa)
+        .catch(err => console.log(err));
+
+    //reseta o formulario
+    form.sobremesaTitulo.value = '';
+    form.sobremesaDescricao.value = '';
+    form.sobremesaLink.value = '';
+    form.sobremesaArquivo.value = '';
+
+});
